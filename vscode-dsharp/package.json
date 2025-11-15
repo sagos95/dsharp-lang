@@ -1,0 +1,40 @@
+{
+  "name": "dsharp-language",
+  "displayName": "D# Language Support",
+  "description": "Syntax highlighting for D# language files (.ds)",
+  "version": "0.1.0",
+  "publisher": "dsharp",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "dsharp",
+        "aliases": [
+          "D#",
+          "dsharp"
+        ],
+        "extensions": [
+          ".ds"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "dsharp",
+        "scopeName": "source.dsharp",
+        "path": "./syntaxes/dsharp.tmLanguage.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/dsharp"
+  }
+}
+

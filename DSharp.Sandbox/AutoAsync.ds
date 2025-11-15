@@ -1,0 +1,75 @@
+using System.Diagnostics;
+
+namespace DSharp.Sandbox.Generated;
+
+// Test automatic async detection in D#
+public class AutoAsyncExample
+{
+    // Test 1: func with Task.Delay - should become async Task
+    public func DelayedPrint(string message)
+    {
+        Console.WriteLine($"Before delay: {message}");
+        Task.Delay(1000);
+        Console.WriteLine($"After delay: {message}");
+    }
+
+    // Test 2: int return type with Task.Delay - should become async Task<int>
+    public int CalculateWithDelay()
+    {
+        var sw = new Stopwatch();
+        sw.Start();
+        Console.WriteLine($"Starting calculation... Elapsed: {sw.Elapsed}");
+        Task.Delay(500);
+        Console.WriteLine($"Calculation complete. Elapsed: {sw.Elapsed}");
+        return 42;
+    }
+
+    // Test 3: func without async calls - should remain void
+    public func RegularMethod()
+    {
+        Console.WriteLine("This is a regular synchronous method");
+    }
+
+    // Test 4: string return type with Task.Delay - should become async Task<string>
+    public string GetMessageAsync()
+    {
+        Task.Delay(200);
+        return "Hello from auto-async!";
+    }
+
+    // Test 5: Multiple Task calls
+    public func MultipleDelays()
+    {
+        Console.WriteLine("First delay");
+        Task.Delay(100);
+        Console.WriteLine("Second delay");
+        Task.Delay(200);
+        Console.WriteLine("Done");
+    }
+
+    // Test 6: Calling other async methods
+    public func CallOtherAsyncMethods()
+    {
+        Console.WriteLine("Calling DelayedPrint...");
+        DelayedPrint("Test message");
+        Console.WriteLine("Done calling");
+    }
+
+    // Test 7: Task.Run (single line)
+    public int UseTaskRun()
+    {
+        var result = Task.Run(() => 123);
+        return result;
+    }
+
+    // Test 8: Method with Run.Async (fire-and-forget)
+    // This method should NOT be async because Run.Async doesn't need await
+    public func StartBackgroundTask()
+    {
+        Console.WriteLine("Starting background task...");
+        // Run.Async is fire-and-forget - no await needed
+        Run.Async(() => DelayedPrint("Background"));
+        Console.WriteLine("Continued without waiting");
+    }
+}
+

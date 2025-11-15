@@ -1,0 +1,202 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "D#",
+  "scopeName": "source.dsharp",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#dsharp-keywords" },
+    { "include": "#strings" },
+    { "include": "#numerics" },
+    { "include": "#types" },
+    { "include": "#attributes" },
+    { "include": "#preprocessor" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.dsharp",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.dsharp",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.block.documentation.dsharp",
+          "begin": "///",
+          "end": "$",
+          "patterns": [
+            {
+              "name": "keyword.tag.documentation.dsharp",
+              "match": "<[^>]+>"
+            }
+          ]
+        }
+      ]
+    },
+    "dsharp-keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.dsharp",
+          "match": "\\b(async\\s+)?func\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.dsharp",
+          "match": "\\b(if|else|while|for|foreach|do|switch|case|default|break|continue|return|goto|try|catch|finally|throw|lock|yield|await|async)\\b"
+        },
+        {
+          "name": "keyword.other.dsharp",
+          "match": "\\b(using|namespace|class|struct|interface|enum|delegate|event|new|typeof|sizeof|is|as|stackalloc|nameof)\\b"
+        },
+        {
+          "name": "storage.modifier.dsharp",
+          "match": "\\b(public|private|protected|internal|static|readonly|const|volatile|virtual|override|abstract|sealed|extern|unsafe|partial|ref|out|in|params)\\b"
+        },
+        {
+          "name": "constant.language.dsharp",
+          "match": "\\b(true|false|null|this|base)\\b"
+        },
+        {
+          "name": "keyword.operator.dsharp",
+          "match": "\\b(operator|implicit|explicit)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.dsharp",
+          "begin": "@\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.dsharp",
+              "match": "\"\""
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.dsharp",
+          "begin": "\\$@\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.dsharp",
+              "match": "\"\""
+            },
+            {
+              "name": "meta.interpolation.dsharp",
+              "begin": "\\{",
+              "end": "\\}",
+              "patterns": [
+                { "include": "#keywords" },
+                { "include": "#dsharp-keywords" },
+                { "include": "#numerics" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.dsharp",
+          "begin": "\\$\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.dsharp",
+              "match": "\\\\."
+            },
+            {
+              "name": "meta.interpolation.dsharp",
+              "begin": "\\{",
+              "end": "\\}",
+              "patterns": [
+                { "include": "#keywords" },
+                { "include": "#dsharp-keywords" },
+                { "include": "#numerics" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.dsharp",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.dsharp",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.dsharp",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.dsharp",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "numerics": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.dsharp",
+          "match": "\\b0[xX][0-9a-fA-F_]+(ul|UL|lu|LU|u|U|l|L)?\\b"
+        },
+        {
+          "name": "constant.numeric.binary.dsharp",
+          "match": "\\b0[bB][01_]+(ul|UL|lu|LU|u|U|l|L)?\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.dsharp",
+          "match": "\\b[0-9][0-9_]*(\\.[0-9_]+)?([eE][+-]?[0-9_]+)?([fFdDmM]|ul|UL|lu|LU|u|U|l|L)?\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.dsharp",
+          "match": "\\b(void|bool|byte|sbyte|char|decimal|double|float|int|uint|long|ulong|short|ushort|object|string|dynamic|var)\\b"
+        },
+        {
+          "name": "entity.name.type.dsharp",
+          "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    },
+    "attributes": {
+      "patterns": [
+        {
+          "name": "meta.attribute.dsharp",
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            { "include": "#strings" },
+            { "include": "#numerics" }
+          ]
+        }
+      ]
+    },
+    "preprocessor": {
+      "patterns": [
+        {
+          "name": "meta.preprocessor.dsharp",
+          "match": "^\\s*#(if|else|elif|endif|define|undef|warning|error|line|region|endregion|pragma)\\b.*$"
+        }
+      ]
+    }
+  }
+}
+

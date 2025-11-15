@@ -1,0 +1,40 @@
+namespace DSharp.Sandbox.Generated;
+
+public class Calculator
+{
+    private int _result;
+
+    public Calculator()
+    {
+        _result = 0;
+    }
+
+    public func Reset()
+    {
+        _result = 0;
+        Console.WriteLine("Calculator reset to 0");
+    }
+
+    public func Add(int value)
+    {
+        _result += value;
+        Console.WriteLine($"Added {value}, result = {_result}");
+    }
+
+    public func Subtract(int value)
+    {
+        _result -= value;
+        Console.WriteLine($"Subtracted {value}, result = {_result}");
+    }
+
+    public func DisplayResult()
+    {
+        Console.WriteLine($"Current result: {_result}");
+    }
+
+    public int GetResult()
+    {
+        return _result;
+    }
+}
+

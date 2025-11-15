@@ -1,0 +1,25 @@
+namespace DSharp.Sandbox.Generated;
+
+public static class AsyncExample
+{
+    public static async func DelayedPrint(string message, int delayMs)
+    {
+        Console.WriteLine($"Starting delayed print: '{message}' (delay: {delayMs}ms)");
+        await Task.Delay(delayMs);
+        Console.WriteLine($"Delayed message: {message}");
+    }
+
+    public static async func RunMultipleTasks()
+    {
+        Console.WriteLine("Running multiple async tasks with D# 'func' keyword...");
+        
+        var task1 = DelayedPrint("First", 100);
+        var task2 = DelayedPrint("Second", 50);
+        var task3 = DelayedPrint("Third", 150);
+        
+        await Task.WhenAll(task1, task2, task3);
+        
+        Console.WriteLine("All async tasks completed!");
+    }
+}
+

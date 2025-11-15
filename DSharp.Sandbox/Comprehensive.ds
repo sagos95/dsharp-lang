@@ -1,0 +1,57 @@
+namespace DSharp.Sandbox.Generated;
+
+// Comprehensive example showing all D# features
+public class ComprehensiveExample
+{
+    private readonly string _name;
+
+    public ComprehensiveExample(string name)
+    {
+        _name = name;
+    }
+
+    // Regular method using D# 'func' keyword instead of 'void'
+    public func PrintInfo()
+    {
+        Console.WriteLine($"Name: {_name}");
+    }
+
+    // Static method with D# syntax
+    public static func StaticMethod()
+    {
+        Console.WriteLine("This is a static D# method");
+    }
+
+    // Async method using D# 'async func' -> transforms to 'async Task'
+    public async func AsyncOperation(int milliseconds)
+    {
+        Console.WriteLine($"Starting async operation for {milliseconds}ms");
+        await Task.Delay(milliseconds);
+        Console.WriteLine("Async operation completed");
+    }
+
+    // Method with multiple parameters
+    public func ProcessData(int value, string text, bool flag)
+    {
+        Console.WriteLine($"Processing: value={value}, text='{text}', flag={flag}");
+        
+        if (flag)
+        {
+            Console.WriteLine($"  Result: {text.ToUpper()} - {value * 2}");
+        }
+    }
+
+    // Method with control flow
+    public func LoopExample(int count)
+    {
+        Console.WriteLine($"Looping {count} times:");
+        
+        for (int i = 0; i < count; i++)
+        {
+            Console.Write($"{i + 1} ");
+        }
+        
+        Console.WriteLine();
+    }
+}
+

@@ -1,0 +1,24 @@
+namespace DSharp.Sandbox.Generated;
+
+public static class Example
+{
+    public static func HelloFromDSharp()
+    {
+        Console.WriteLine("Hello from D# language!");
+        Console.WriteLine("This method uses 'func' instead of 'void'");
+    }
+    
+    public static func PrintMessage(string message)
+    {
+        Console.WriteLine($"D# Message: {message}");
+    }
+    
+    public static func DoSomething(int value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            Console.WriteLine($"  Iteration {i + 1}");
+        }
+    }
+}
+
