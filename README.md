@@ -4,7 +4,7 @@ D# (D-Sharp, or "Domain Sharp") is an experimental language extension for C# tha
 
 ## Features
 
-- **Automatic asynchronous code generation**: No more async-await bullshit! You don't have to write `async` and `await` 100500 times. D# automatically detects `Task` methods and always awaits them. If you really want to run some method asynchronously – just use `Run.Async(() => Method());` construction. Because you don't need asynchronous calls that often, huh?
+- **Automatic asynchronous code generation**: No more async-await bullshit! You don't have to write `async` and `await` 100500 times. D# automatically detects `Task` methods and always awaits them. If you really want to run some method asynchronously – just use `Run.Async(() => Method());` construction. Because you don't need asynchronous calls that often, huh? And yes, `async` and `Task<>` types will automatically propagate to all the necessary methods. Seriously, guys, stop worrying about async-await.
 - **`func` keyword**: Use `func` instead of `void` for methods that don't return a value. No more avoiding in your favorite code language.
 - **`.ds` file extension**: Write D# code in `.ds` files
 - **Automatic compilation**: D# code is automatically translated to C# during build time using Source Generators
