@@ -1,10 +1,10 @@
 # D# Language
 
-D# (D-Sharp) is an experimental language extension for C# that provides alternative syntax while compiling to standard C#.
+D# (D-Sharp, or "Domain Sharp") is an experimental language extension for C# that provides alternative syntax while compiling to standard C#. D# is domain driven design oriented and aims to provide an environment where it is impossible to write bad or incorrect architectures.
 
 ## Features
 
-- **`func` keyword**: Use `func` instead of `void` for methods that don't return a value
+- **`func` keyword**: Use `func` instead of `void` for methods that don't return a value. No more avoiding in your favorite code language.
 - **`.ds` file extension**: Write D# code in `.ds` files
 - **Automatic compilation**: D# code is automatically translated to C# during build time using Source Generators
 
@@ -76,7 +76,7 @@ Currently implemented D# language features:
 | D# Syntax | C# Translation | Description |
 |-----------|---------------|-------------|
 | `func MethodName()` | `void MethodName()` | Non-returning methods |
-| `async func MethodName()` | `async Task MethodName()` | Async methods without return value |
+| `func MethodName()` | `async Task MethodName()` | Async methods without return value, if there are any awaitable Tasks in the method body |
 
 ## Examples
 
@@ -165,14 +165,40 @@ Then restart Rider. See [SYNTAX_HIGHLIGHTING.md](SYNTAX_HIGHLIGHTING.md) for det
 
 ## Future Extensions
 
-Potential features to add:
-- More keyword aliases (`fn`, `proc`, `sub`)
-- Return type aliases (`num` for `int`, `text` for `string`)
+Later there will be constructs like
+`slice` for declaring subdomains:
+
+```
+slice EShop.AddOrderItem;
+slice EShop.RemoveOrderItem;
+```
+
+DI shortcuts (lifetime types instead of the word “class”):
+
+```
+singleton AddOrderItemHandler { ... }
+transient OrderItemsMySqlRepository { ... }
+```
+
+Automatic storage of domain models together with their domain events:
+
+```
+entity OrderItem { ... }
+```
+
+And other constructs that explicitly enforce a hexagonal-architecture style, making it impossible to violate boundaries and dependencies.
+
+```
+infrastructure EShop.MySql;
+application EShop.Order;
+domain EShop.Order;
+Error ds5012: Unable to use MySql package in domain layer. Domain layers must not depend on infrastructure layers.
+```
+
+Other potential features to add:
 - Simplified syntax for common patterns
 - Custom operators
 - Macro system
 - Advanced type inference
-- Lambda expression shortcuts
-- Property declaration shortcuts
 - Full IDE plugin with IntelliSense (beyond syntax highlighting)
 
